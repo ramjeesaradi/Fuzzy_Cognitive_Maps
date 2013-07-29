@@ -15,10 +15,14 @@ double fitness(double dmns[])
     double a[10], a2[10];
     double a1[10], net , w[10][10], toterror = 0.0;
     //int a1[50][10000];
+    /*for(int x=0; x < 100 ; x++){
+    	cout << dmns[x]<<"  "<< x << endl;
+    }*/
+
     for(m=0;m<10;m++)    { //import the weights
         for(n=0;n<10;n++)        {
             dmns[m*10 + n] = w[m][n];
-            //cout <<m*10 + n <<" " << dmns[m*10 + n] << endl;
+            cout <<m*10 + n <<" " << dmns[m*10 + n] << endl;
         	//inwts >> w[m][n];
             //cout << w[m][n] << endl ;
         }
@@ -75,8 +79,8 @@ double fitness(double dmns[])
                    outwts << w[m][n]<<"\t";
                 }outwts << "\n";
                 }*/
-
-        return toterror/700.0;
+    	//cout
+        return (toterror/700);
 }
 void pso(){
     int dmnsns = 100;
@@ -85,20 +89,25 @@ void pso(){
     for(int i=0; i < prtcls; i++){
         for(int j = 0; j < dmnsns; j++){
             x[i][j]= ((double)(rand() % 1000))/1000.0;
-            cout << x[i][j]<<endl;
+            //cout << x[i][j]<<endl;
         }
     }
 
     memcpy(p,x,sizeof(x));
-    //cout << p[19][98];
+    /*for(int x=0; x < sizeof(dmnsns); x++){
+        	cout << sizeof(x)<<"  "<< x << endl;
+        }*/
+
     //g[dmnsns] = {0.0};
     for(int i= 0; i < prtcls; i++){
-    	cout<< fitness(x[i])<<endl;
-    	if ( fitness(p[i]) > fitness( g ) ){
+    	double temp[dmnsns];
+    	memcpy(temp,p[i],sizeof(p));
+    	cout<< fitness(temp)<<endl;
+    	/*if ( fitness(p[i]) > fitness( g ) ){
     		//cout << fitness(p[i]) << endl;
-    		memcpy(g,p[i],sizeof(p[i]));
-    		//cout << "gan"<< endl;
-    	}
+    		memcpy(g,p[i],sizeof(p));
+    		cout << "gan"<< endl;
+    	}*/
     }
 
     //cout << g[39];
