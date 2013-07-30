@@ -31,7 +31,7 @@ double fitness(double dmns[])
     for (l = 0; l < 699 ; l++) { // iterate for each record
         for (m = 0; m<10; m++)            {// loading the concepts within records
             inrec >> a[m];
-            //outrec << a[m] << "\t";
+            outrec << a[m] << "\t";
             a2[m]=a[m]; //saving original values to the actual concepts
 
             //cout << a[m] <<" ";
