@@ -43,7 +43,7 @@ all: fcm.exe
 fcm.exe: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cygwin C++ Linker'
-	g++  -o "fcm.exe" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++  -o "fcm.exe" $(OBJS) $(USER_OBJS) $(LIBS) -std=c++11 -g
 	@echo 'Finished building target: $@'
 	@echo ' '
 
