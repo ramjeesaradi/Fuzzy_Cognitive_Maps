@@ -53,7 +53,7 @@ double fitness(array<double, N> dmns)
         //cout << endl;
         t = 0;
         while (t < 3) {//total two increments
-            //calculating activation of each func
+            // Calculating activation of each function
             for (m = 0; m < 10; m++) {
                 for (n=0; n < 10; n++) {
                     net += a[n] * w[n][m];
