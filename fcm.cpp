@@ -18,9 +18,12 @@ double fitness(double dmns[])
 
     // TODO: l,m,n,t say nothing about what the variables are.
 
+    const int size = 10;
+
     int l, m, n, t;
+    double net, toterror = 0.0;
     array<double, 10> a, a1, a2;
-    double net, w[10][10], toterror = 0.0;
+    array<array<double, size>, size> w;
 
     //int a1[50][10000];
     /*
@@ -42,24 +45,22 @@ double fitness(double dmns[])
         for (m = 0; m < 10; m++)            {// loading the concepts within records
             inrec >> a[m];
             //outrec << a[m] << "\t";
-            a2[m]=a[m]; //saving original values to the actual concepts
+            a2[m] = a[m]; //saving original values to the actual concepts
 
             //cout << a[m] <<" ";
         }
         //outrec << endl;
         //a[9]=0; // As it is training data
         //cout << endl;
-        t=0;
-        while(t<3){//total two increments
-
-
-            for (m = 0; m < 10; m++)            {//caliculating activation of each func
-
-                for (n=0; n < 10; n++)                {
-                    net += a[n]*w[n][m];
+        t = 0;
+        while (t < 3) {//total two increments
+            //calculating activation of each func
+            for (m = 0; m < 10; m++) {
+                for (n=0; n < 10; n++) {
+                    net += a[n] * w[n][m];
                 }
                 //cout << m <<" "<< net <<" " << t << endl;
-                a1[m] = 1.0/(1.0+ exp((net*(-0.5)))) ;
+                a1[m] = 1.0 / (1.0 + exp(net * -0.5));
                 //cout << m <<" "<< a1[m] <<" " << t << endl;
             }
 
@@ -80,7 +81,7 @@ double fitness(double dmns[])
            }
            }*/
 
-        toterror += sqrt(pow((a2[9]-a1[9]),2.0));
+        toterror += sqrt(pow(a2[9] - a1[9], 2.0));
         //cout << l << " "<< toterror <<" "<<  a2[9] <<" "<< a1[9] <<endl;
     }
 
@@ -92,7 +93,7 @@ double fitness(double dmns[])
       }outwts << "\n";
       }*/
     //cout << toterror/700.0 << endl;
-    return toterror/700.0;
+    return toterror / 700.0;
 }
 double *pso(double epsilon, double omega, double phyp, double phyg){
     int dmnsns = 100;
