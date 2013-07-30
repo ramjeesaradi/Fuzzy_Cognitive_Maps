@@ -11,6 +11,7 @@ double fitness(double dmns[])
 {
     ifstream inrec ("wbc.csv");
     ifstream inwts ("weights1.csv");
+    ofstream outrec ("wbcrec.csv");
     int l, m, n, t;
     double a[10], a2[10];
     double a1[10], net , w[10][10], toterror = 0.0;
@@ -21,21 +22,22 @@ double fitness(double dmns[])
 
     for(m=0;m<10;m++)    { //import the weights
         for(n=0;n<10;n++)        {
-            dmns[m*10 + n] = w[m][n];
-            cout <<m*10 + n <<" " << dmns[m*10 + n] << endl;
+            w[m][n] = dmns[m*10 + n];
+            //cout <<m*10 + n <<" " << dmns[m*10 + n] << endl;
         	//inwts >> w[m][n];
             //cout << w[m][n] << endl ;
         }
     }
-    for (l = 0; l < 700 ; l++) { // iterate for each record
-       //inrec >> a[0] >> a[1] >> a[2] >>a[3] >>a[4] >>a[5] >>a[6] >>a[7] >>a[8] >>a[9];
-       //cout << a[l] << " " << b[l] << " " << c[l]<<" " << d[l]<<" " << e[l]<<" " << f[l]<<" " << g[l]<<" " << h[l]<<" " << i[l] << " " << j[l] << endl;
+    for (l = 0; l < 699 ; l++) { // iterate for each record
         for (m = 0; m<10; m++)            {// loading the concepts within records
             inrec >> a[m];
+            //outrec << a[m] << "\t";
             a2[m]=a[m]; //saving original values to the actual concepts
 
             //cout << a[m] <<" ";
-            } a[9]=0; // As it is training data
+            }
+        //outrec << endl;
+        //a[9]=0; // As it is training data
         //cout << endl;
         t=0;
         while(t<3){//total two increments
@@ -47,8 +49,8 @@ double fitness(double dmns[])
                  net += a[n]*w[n][m];
                 }
             //cout << m <<" "<< net <<" " << t << endl;
-            a1[m] = 1/(1+ pow((net*(-1.0)),2)) ;
-            //cout << a1[m] <<endl;
+            a1[m] = 1.0/(1.0+ exp((net*(-0.5)))) ;
+            //cout << m <<" "<< a1[m] <<" " << t << endl;
             }
 
         memcpy(a,a1,sizeof(a1));
@@ -68,8 +70,8 @@ double fitness(double dmns[])
             }
         }*/
 
-        toterror = toterror + sqrt(pow((a2[9]-a1[9]),2.0));
-        //cout << l << " "<< a1[9] <<endl;
+        toterror += sqrt(pow((a2[9]-a1[9]),2.0));
+        //cout << l << " "<< toterror <<" "<<  a2[9] <<" "<< a1[9] <<endl;
         }
 
         /*ofstream outwts ("weights1.csv");
@@ -79,8 +81,8 @@ double fitness(double dmns[])
                    outwts << w[m][n]<<"\t";
                 }outwts << "\n";
                 }*/
-    	//cout
-        return (toterror/700);
+    	//cout << toterror/700.0 << endl;
+        return toterror/700.0;
 }
 void pso(){
     int dmnsns = 100;
@@ -88,27 +90,32 @@ void pso(){
     double g[dmnsns], p[prtcls][dmnsns], x[prtcls][dmnsns];
     for(int i=0; i < prtcls; i++){
         for(int j = 0; j < dmnsns; j++){
-            x[i][j]= ((double)(rand() % 1000))/1000.0;
-            //cout << x[i][j]<<endl;
+            x[i][j] = ((double) (rand()%1000))/1000.0 ;
+            g[j] = 0.0;
+            //cout << x[i][j] <<endl;
         }
     }
 
     memcpy(p,x,sizeof(x));
-    /*for(int x=0; x < sizeof(dmnsns); x++){
-        	cout << sizeof(x)<<"  "<< x << endl;
+    /*for(int x=0; x < 100; x++){
+        	cout << x <<"  "<< p[0][x] << endl;
         }*/
 
-    //g[dmnsns] = {0.0};
+
     for(int i= 0; i < prtcls; i++){
-    	double temp[dmnsns];
-    	memcpy(temp,p[i],sizeof(p));
-    	cout<< fitness(temp)<<endl;
-    	/*if ( fitness(p[i]) > fitness( g ) ){
+    	//double temp[dmnsns];
+    	//memcpy(temp,p[i],sizeof(p));
+    	/*for(int x=0; x < 100; x++){
+    	        	cout << x <<"  "<< temp[x] << endl;
+    	        }*/
+    	//cout<< fitness(g)<<endl;
+    	if ( fitness(p[i]) < fitness(g) ){
     		//cout << fitness(p[i]) << endl;
     		memcpy(g,p[i],sizeof(p));
-    		cout << "gan"<< endl;
-    	}*/
+    		cout << "in loop";
+    	}
     }
+
 
     //cout << g[39];
 

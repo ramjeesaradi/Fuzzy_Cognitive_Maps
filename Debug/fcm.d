@@ -1,1 +1,1 @@
-fcm.d: ../fcm.cpp
+fcm.d fcm.o: ../fcm.cpp
