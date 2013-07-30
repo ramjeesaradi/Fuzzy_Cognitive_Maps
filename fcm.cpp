@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
-#include <math.h>
+//#include <math.h>
 #include <string.h>
 #include <cstdlib>
 #include <stdio.h>
@@ -18,7 +18,7 @@ double fitness(double dmns[])
 
     int l, m, n, t;
     double a[10], a2[10];
-    double a1[10], net , w[10][10], toterror = 0.0;
+    double a1[10], net, w[10][10], toterror = 0.0;
     //int a1[50][10000];
     /*for(int x=0; x < 100 ; x++){
       cout << dmns[x]<<"  "<< x << endl;
