@@ -1,12 +1,14 @@
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <cmath>
-//#include <math.h>
-#include <string.h>
+#include <cstring>
 #include <cstdlib>
-#include <stdio.h>
+#include <array>
 
-using namespace std;
+using std::cout;
+using std::array;
+using std::ifstream;
+using std::ofstream;
 
 double fitness(double dmns[])
 {
@@ -17,23 +19,27 @@ double fitness(double dmns[])
     // TODO: l,m,n,t say nothing about what the variables are.
 
     int l, m, n, t;
-    double a[10], a2[10];
-    double a1[10], net, w[10][10], toterror = 0.0;
-    //int a1[50][10000];
-    /*for(int x=0; x < 100 ; x++){
-      cout << dmns[x]<<"  "<< x << endl;
-      }*/
+    array<double, 10> a, a1, a2;
+    double net, w[10][10], toterror = 0.0;
 
-    for(m=0;m<10;m++)    { //import the weights
-        for(n=0;n<10;n++)        {
+    //int a1[50][10000];
+    /*
+      for(int x=0; x < 100 ; x++){
+      cout << dmns[x]<<"  "<< x << endl;
+      }
+    */
+
+    for(m = 0; m < 10; m++)    { //import the weights
+        for(n = 0; n < 10; n++)        {
             w[m][n] = dmns[m*10 + n];
             //cout <<m*10 + n <<" " << dmns[m*10 + n] << endl;
         	//inwts >> w[m][n];
             //cout << w[m][n] << endl ;
         }
     }
+
     for (l = 0; l < 699 ; l++) { // iterate for each record
-        for (m = 0; m<10; m++)            {// loading the concepts within records
+        for (m = 0; m < 10; m++)            {// loading the concepts within records
             inrec >> a[m];
             //outrec << a[m] << "\t";
             a2[m]=a[m]; //saving original values to the actual concepts
@@ -57,7 +63,7 @@ double fitness(double dmns[])
                 //cout << m <<" "<< a1[m] <<" " << t << endl;
             }
 
-            memcpy(a,a1,sizeof(a1));
+            a = a1;
             /*for (m = 0; m < 10; m++){// updating concepts
               a[m]=a1[m];
               }*/
