@@ -9,8 +9,7 @@ using std::array;
 using std::ifstream;
 using std::ofstream;
 
-template<size_t N>
-double fitness(array<double, N> dmns)
+double fitness(array<double, 100> dmns)
 {
     ifstream inrec ("wbc.csv");
     ifstream inwts ("weights1.csv");
@@ -96,8 +95,7 @@ double fitness(array<double, N> dmns)
     return toterror / 700.0;
 }
 
-template<size_t N>
-array<double, N> pso(double epsilon, double omega, double phyp, double phyg){
+array<double, 100> pso(double epsilon, double omega, double phyp, double phyg){
 
     const int dmnsns = 100, prtcls = 20;
 
