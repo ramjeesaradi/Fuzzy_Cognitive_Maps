@@ -11,7 +11,7 @@ double fitness(double dmns[])
 {
     ifstream inrec ("wbc.csv");
     ifstream inwts ("weights1.csv");
-    ofstream outrec ("wbcrec.csv");
+    //ofstream outrec ("wbcrec.csv");
     int l, m, n, t;
     double a[10], a2[10];
     double a1[10], net , w[10][10], toterror = 0.0;
@@ -31,7 +31,7 @@ double fitness(double dmns[])
     for (l = 0; l < 699 ; l++) { // iterate for each record
         for (m = 0; m<10; m++)            {// loading the concepts within records
             inrec >> a[m];
-            outrec << a[m] << "\t";
+            //outrec << a[m] << "\t";
             a2[m]=a[m]; //saving original values to the actual concepts
 
             //cout << a[m] <<" ";
@@ -113,7 +113,7 @@ double* pso(double epsilon, double omega, double phyp, double phyg){
     	if ( fitness(p[i]) < fitness(g) ){
     		//cout << fitness(p[i]) << endl;
     		memcpy(g,p[i],sizeof(p));
-    		//cout << "in loop";
+    		cout << "in loop";
     	}
     }
     while(fitness(g)<epsilon){
