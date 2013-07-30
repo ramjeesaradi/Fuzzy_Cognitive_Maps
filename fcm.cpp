@@ -84,7 +84,7 @@ double fitness(double dmns[])
     	//cout << toterror/700.0 << endl;
         return toterror/700.0;
 }
-double *pso(double epsilon, double omega, double phyp, double phyg){
+double* pso(double epsilon, double omega, double phyp, double phyg){
     int dmnsns = 100;
     int prtcls = 20;
     double g[dmnsns], p[prtcls][dmnsns], x[prtcls][dmnsns], v[prtcls][dmnsns];
@@ -139,6 +139,6 @@ return g;
 }
 int main(){
     //fitness();
-    //pso();
+    double *temp=pso(0.2,0.5,0.5,0.5);
     return 0;
 }

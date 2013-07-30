@@ -4,13 +4,16 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../fcm.cpp 
+../fcm.cpp \
+../fcmtest.cpp 
 
 OBJS += \
-./fcm.o 
+./fcm.o \
+./fcmtest.o 
 
 CPP_DEPS += \
-./fcm.d 
+./fcm.d \
+./fcmtest.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
