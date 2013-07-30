@@ -12,8 +12,8 @@ using std::ofstream;
 double fitness(array<double, 100> dmns)
 {
     ifstream inrec ("wbc.csv");
-    ifstream inwts ("weights1.csv");
-    ofstream outrec ("wbcrec.csv");
+    //ifstream inwts ("weights1.csv");
+    //ofstream outrec ("wbcrec.csv");
 
     // TODO: l,m,n,t say nothing about what the variables are.
 
@@ -35,7 +35,6 @@ double fitness(array<double, 100> dmns)
         for(n = 0; n < 10; n++)        {
             w[m][n] = dmns[m*10 + n];
             //cout <<m*10 + n <<" " << dmns[m*10 + n] << endl;
-        	//inwts >> w[m][n];
             //cout << w[m][n] << endl ;
         }
     }
@@ -151,7 +150,16 @@ array<double, 100> pso(double epsilon, double omega, double phyp, double phyg){
 }
 
 int main() {
-    //fitness();
-    //pso();
+   ofstream otwts("weights.csv")
+	//fitness();
+   double temp[]= pso(0.2,0.5,0.5,0.5);
+   for(int m = 0; m < 10; m++)    { //import the weights
+           for(int n = 0; n < 10; n++)        {
+              otwts << temp[m*10 + n] << "\t";
+               //cout <<m*10 + n <<" " << dmns[m*10 + n] << endl;
+               //cout << w[m][n] << endl ;
+           }otwts << endl;
+       }
     return 0;
+
 }
