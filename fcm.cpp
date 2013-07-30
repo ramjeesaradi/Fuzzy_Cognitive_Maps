@@ -1,8 +1,6 @@
 #include <fstream>
 #include <iostream>
 #include <cmath>
-#include <cstring>
-#include <cstdlib>
 #include <array>
 
 using std::cout;
@@ -10,7 +8,7 @@ using std::array;
 using std::ifstream;
 using std::ofstream;
 
-double fitness(double dmns[])
+double fitness(array<double, 100> dmns)
 {
     ifstream inrec ("wbc.csv");
     ifstream inwts ("weights1.csv");
@@ -95,10 +93,15 @@ double fitness(double dmns[])
     //cout << toterror/700.0 << endl;
     return toterror / 700.0;
 }
-double *pso(double epsilon, double omega, double phyp, double phyg){
-    int dmnsns = 100;
-    int prtcls = 20;
-    double g[dmnsns], p[prtcls][dmnsns], x[prtcls][dmnsns], v[prtcls][dmnsns];
+
+
+array<double, 100> pso(double epsilon, double omega, double phyp, double phyg){
+
+    const int dmnsns = 100, prtcls = 20;
+
+    array<double, dmnsns> g;
+    array<array<double, dmnsns>, prtcls> p, x, v;
+
     for(int i=0; i < prtcls; i++){
         for(int j = 0; j < dmnsns; j++){
             x[i][j] = -1000.0 + ((rand()%10000)/10000.0)*2000.0 ;
@@ -108,13 +111,13 @@ double *pso(double epsilon, double omega, double phyp, double phyg){
         }
     }
 
-    memcpy(p,x,sizeof(x));
+    p = x;
     /*for(int x=0; x < 100; x++){
       cout << x <<"  "<< p[0][x] << endl;
       }*/
 
-
     for(int i= 0; i < prtcls; i++){// initializng global best
+
     	//double temp[dmnsns];
     	//memcpy(temp,p[i],sizeof(p));
     	/*for(int x=0; x < 100; x++){
@@ -123,7 +126,7 @@ double *pso(double epsilon, double omega, double phyp, double phyg){
     	//cout<< fitness(g)<<endl;
     	if ( fitness(p[i]) < fitness(g) ){
     		//cout << fitness(p[i]) << endl;
-    		memcpy(g,p[i],sizeof(p));
+    		g = p[i];
     		//cout << "in loop";
     	}
     }
@@ -137,10 +140,10 @@ double *pso(double epsilon, double omega, double phyp, double phyg){
                 x[i][j] += v[i][j];
             }
             if (fitness(p[i]) < fitness(x[i])){
-                memcpy(p[i], x[i], sizeof(x[i]) );
+                p[i] = x[i];
             }
             if (fitness(g) < fitness(p[i])){
-                memcpy(g, p[i], sizeof(p[i]) );
+                g = p[i];
             }
         }
     }
