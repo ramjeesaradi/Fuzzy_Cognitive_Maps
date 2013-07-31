@@ -110,11 +110,11 @@ double* pso(double epsilon, double omega, double phyp, double phyg){
     	        	cout << x <<"  "<< temp[x] << endl;
     	        }*/
     	//cout<< fitness(g)<<endl;
-    	/*if ( fitness(p[i]) < fitness(g)){
+    	if ( fitness(p[i]) < fitness(g)){
     		//cout << fitness(p[i]) << endl;
     		memcpy(g,p[i],sizeof(p));
     		cout << "in loop";
-    	}*/
+    	}
     }
     for (int iter = 0; iter < 1000; ++iter)
     //while(fitness(g)<epsilon)
@@ -134,6 +134,9 @@ double* pso(double epsilon, double omega, double phyp, double phyg){
     		 }
     	 }
     }
+    for(int x=0; x < dmnsns; x++){
+            	cout << x <<"  "<< g << endl;
+            }
 
 return g;
 
@@ -147,10 +150,10 @@ int main(){
        for(int m = 0; m < 10; m++)    { //import the weights
                for(int n = 0; n < 10; n++)        {
                   otwts << temp[m*10 + n] << "\t";
-                   cout <<m*10 + n <<" " << temp[m*10 + n] << endl;
+                   //cout <<m*10 + n <<" " << temp[m*10 + n] << endl;
                    //cout << w[m][n] << endl ;
                }otwts << endl;
            }
-       cout << fitness(temp);
+      // cout << fitness(temp);
     return 0;
 }
