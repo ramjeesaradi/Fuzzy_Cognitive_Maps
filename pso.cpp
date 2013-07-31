@@ -27,15 +27,17 @@ array<double, 100> pso(double epsilon, double omega, double phyp, double phyg) {
     	/*for(int x=0; x < 100; x++){
           cout << x <<"  "<< temp[x] << endl;
           }*/
-    	//cout<< fitness(g)<<endl;
+    	//cout<< fitness(g) <<endl;
     	if ( fitness(p[i]) < fitness(g) ){
     		//cout << fitness(p[i]) << endl;
     		g = p[i];
-    		//cout << "in loop";
+    		cout << "in loop";
     	}
     }
-    
-    while(fitness(g) < epsilon){
+    for(int iter = 0; iter < 1000; iter ++ )
+    //while(fitness(g) < epsilon)
+	{
+		cout << iter << endl;
         for(int i= 0; i < prtcls; i++){
             for(int j = 0; j < dmnsns; j++){
                 double rp = (rand()%1000)/1000.0;
@@ -43,10 +45,10 @@ array<double, 100> pso(double epsilon, double omega, double phyp, double phyg) {
                 v[i][j] = omega * v[i][j] + phyp*rp*(p[i][j] - x[i][j]) + phyg*rg*(g[j] - x[i][j]) ;
                 x[i][j] += v[i][j];
             }
-            if (fitness(p[i]) < fitness(x[i])){
+            if (fitness(p[i]) > fitness(x[i])){
                 p[i] = x[i];
             }
-            if (fitness(g) < fitness(p[i])){
+            if (fitness(g) > fitness(p[i])){
                 g = p[i];
             }
         }
