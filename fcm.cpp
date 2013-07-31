@@ -116,7 +116,7 @@ double* pso(double epsilon, double omega, double phyp, double phyg){
     		cout << "in loop";
     	}
     }
-    for (int iter = 0; iter < 1000; ++iter)
+    for (int iter = 0; iter < 10000; ++iter)
     //while(fitness(g)<epsilon)
     {    cout<<iter<<endl;
     	 for(int i= 0; i < prtcls; i++){
@@ -130,7 +130,7 @@ double* pso(double epsilon, double omega, double phyp, double phyg){
     			 memcpy(p[i], x[i], sizeof(x[i]) );
     		 }
     		 if (fitness(g) > fitness(p[i])){
-    		     			 memcpy(g, p[i], sizeof(p) );
+    		     			 memcpy(g, p[i], sizeof(p[i]) );
     		 }
     	 }
     }
