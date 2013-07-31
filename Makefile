@@ -1,4 +1,15 @@
-fcm: fcm.cpp
-	g++ -std=c++11 -o fcm fcm.cpp -g
+FLAGS = -g -std=c++11
+
+all: fcm
+
+fitness.o: fitness.cpp fitness.h
+	g++ -c fitness.cpp $(FLAGS)
+
+pso.o: pso.cpp pso.h fitness.o
+	g++ -c pso.cpp $(FLAGS)
+
+fcm: fcm.cpp fitness.o pso.o
+	g++ -o fcm fitness.o pso.o fcm.cpp $(FLAGS)
+
 clean:
-	rm fcm
+	rm -f *.o fcm
