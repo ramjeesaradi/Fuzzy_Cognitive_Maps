@@ -9,6 +9,7 @@ using namespace std;
 
 double fitness(double dmns[])
 {
+	//cout << "called Filtness" << endl;
     ifstream inrec ("wbc.csv");
     //ifstream inwts ("weights1.csv");
     //ofstream outrec ("wbcrec.csv");
@@ -109,13 +110,15 @@ double* pso(double epsilon, double omega, double phyp, double phyg){
     	        	cout << x <<"  "<< temp[x] << endl;
     	        }*/
     	//cout<< fitness(g)<<endl;
-    	if ( fitness(p[i]) > fitness(g) ){
+    	/*if ( fitness(p[i]) < fitness(g)){
     		//cout << fitness(p[i]) << endl;
     		memcpy(g,p[i],sizeof(p));
     		cout << "in loop";
-    	}
+    	}*/
     }
-    while(fitness(g)<epsilon){
+    for (int iter = 0; iter < 1000; ++iter)
+    //while(fitness(g)<epsilon)
+    {    cout<<iter<<endl;
     	 for(int i= 0; i < prtcls; i++){
     		 for(int j = 0; j < dmnsns; j++){
     			 double rp = (rand()%1000)/1000.0;
@@ -123,11 +126,11 @@ double* pso(double epsilon, double omega, double phyp, double phyg){
     			 v[i][j] = omega * v[i][j] + phyp*rp*(p[i][j] - x[i][j]) + phyg*rg*(g[j] - x[i][j]) ;
     			 x[i][j] += v[i][j];
     		 }
-    		 if (fitness(p[i]) < fitness(x[i])){
+    		 if (fitness(p[i]) > fitness(x[i])){
     			 memcpy(p[i], x[i], sizeof(x[i]) );
     		 }
-    		 if (fitness(g) < fitness(p[i])){
-    		     			 memcpy(g, p[i], sizeof(p[i]) );
+    		 if (fitness(g) > fitness(p[i])){
+    		     			 memcpy(g, p[i], sizeof(p) );
     		 }
     	 }
     }
