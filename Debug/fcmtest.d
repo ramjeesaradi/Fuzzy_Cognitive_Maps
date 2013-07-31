@@ -1,0 +1,1 @@
+fcmtest.d: ../fcmtest.cpp

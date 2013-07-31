@@ -10,12 +10,11 @@ using namespace std;
 double fitness(double dmns[])
 {
     ifstream inrec ("wbc.csv");
-    ifstream inwts ("weights1.csv");
+    //ifstream inwts ("weights1.csv");
     //ofstream outrec ("wbcrec.csv");
     int l, m, n, t;
     double a[10], a2[10];
     double a1[10], net , w[10][10], toterror = 0.0;
-    //int a1[50][10000];
     /*for(int x=0; x < 100 ; x++){
     	cout << dmns[x]<<"  "<< x << endl;
     }*/
@@ -30,7 +29,7 @@ double fitness(double dmns[])
     }
     for (l = 0; l < 699 ; l++) { // iterate for each record
         for (m = 0; m<10; m++)            {// loading the concepts within records
-            inrec >> a[m];
+            //inrec >> a[m];
             //outrec << a[m] << "\t";
             a2[m]=a[m]; //saving original values to the actual concepts
 
@@ -70,7 +69,7 @@ double fitness(double dmns[])
             }
         }*/
 
-        toterror += sqrt(pow((a2[9]-a1[9]),2.0));
+        toterror += pow((a2[9]-a1[9]),2.0);
         //cout << l << " "<< toterror <<" "<<  a2[9] <<" "<< a1[9] <<endl;
         }
 
@@ -110,7 +109,7 @@ double* pso(double epsilon, double omega, double phyp, double phyg){
     	        	cout << x <<"  "<< temp[x] << endl;
     	        }*/
     	//cout<< fitness(g)<<endl;
-    	if ( fitness(p[i]) < fitness(g) ){
+    	if ( fitness(p[i]) > fitness(g) ){
     		//cout << fitness(p[i]) << endl;
     		memcpy(g,p[i],sizeof(p));
     		cout << "in loop";
@@ -139,6 +138,16 @@ return g;
 }
 int main(){
     //fitness();
-    double *temp=pso(0.2,0.5,0.5,0.5);
+    ofstream otwts("weights.csv");
+    	//fitness();
+       double *temp= pso(0.2,0.5,0.5,0.5);
+       for(int m = 0; m < 10; m++)    { //import the weights
+               for(int n = 0; n < 10; n++)        {
+                  otwts << temp[m*10 + n] << "\t";
+                   cout <<m*10 + n <<" " << temp[m*10 + n] << endl;
+                   //cout << w[m][n] << endl ;
+               }otwts << endl;
+           }
+       cout << fitness(temp);
     return 0;
 }
