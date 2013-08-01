@@ -2,4 +2,4 @@
 
 #include "fitness.h"
 
-array<double, 100> pso(double epsilon, double omega, double phyp, double phyg);
+array<long double, 100> pso(long double epsilon, long double omega, long double phyp, long double phyg);

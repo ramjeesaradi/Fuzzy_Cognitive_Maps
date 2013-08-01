@@ -12,4 +12,4 @@ using std::array;
 using std::ifstream;
 using std::ofstream;
 
-double test(array<double, 100> dmns);
+long double test(array<long double, 100> dmns);

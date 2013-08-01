@@ -1,15 +1,15 @@
 #include "pso.h"
 
-array<double, 100> pso(double epsilon, double omega, double phyp, double phyg) {
+array<long double, 100> pso(long double epsilon, long double omega, long double phyp, long double phyg) {
     const int dmnsns = 100, prtcls = 20;
 
-    array<double, dmnsns> g;
-    array<array<double, dmnsns>, prtcls> p, x, v;
+    array<long double, dmnsns> g;
+    array<array<long double, dmnsns>, prtcls> p, x, v;
 
     for(int i=0; i < prtcls; i++){
         for(int j = 0; j < dmnsns; j++){
-            x[i][j] = -1000.0 + ((rand()%10000)/10000.0)*2000.0 ;
-            v[i][j] = -2000.0 + ((rand()%10000)/10000.0)*4000.0;
+            x[i][j] = -1.0 + ((rand()%100000000)/100000000.0)*2.0 ;
+            v[i][j] = -2.0 + ((rand()%100000000)/100000000.0)*4.0;
             g[j] = 0.0;
             //cout << x[i][j] <<endl;
         }
@@ -22,7 +22,7 @@ array<double, 100> pso(double epsilon, double omega, double phyp, double phyg) {
 
     for(int i= 0; i < prtcls; i++){// initializng global best
 
-    	//double temp[dmnsns];
+    	//long double temp[dmnsns];
     	//memcpy(temp,p[i],sizeof(p));
     	/*for(int x=0; x < 100; x++){
           cout << x <<"  "<< temp[x] << endl;
@@ -31,17 +31,17 @@ array<double, 100> pso(double epsilon, double omega, double phyp, double phyg) {
     	if ( fitness(p[i]) < fitness(g) ){
     		//cout << fitness(p[i]) << endl;
     		g = p[i];
-    		cout << "in loop";
+    		cout << "in loop"  << endl;
     	}
     }
-    for(int iter = 0; iter < 1000; iter ++ )
-    //while(fitness(g) < epsilon)
-	{
-		cout << iter << endl;
+    for(int iter = 0; iter < 20; iter ++ )
+	//int iter = 0;
+    //while(fitness(g) > epsilon)
+	{	
         for(int i= 0; i < prtcls; i++){
             for(int j = 0; j < dmnsns; j++){
-                double rp = (rand()%1000)/1000.0;
-                double rg = (rand()%1000)/1000.0;
+                long double rp = (rand()%10000000)/10000000.0;
+                long double rg = (rand()%10000000)/10000000.0;
                 v[i][j] = omega * v[i][j] + phyp*rp*(p[i][j] - x[i][j]) + phyg*rg*(g[j] - x[i][j]) ;
                 x[i][j] += v[i][j];
             }
@@ -52,6 +52,12 @@ array<double, 100> pso(double epsilon, double omega, double phyp, double phyg) {
                 g = p[i];
             }
         }
+		/*for(int x=0; x < 100; x++){
+		cout << x <<"  "<< g[x] << endl;
+		}*/
+		cout << iter <<"0"<< fitness(g)<< endl;
+		//iter ++;
+		
     }
     return g;
 }

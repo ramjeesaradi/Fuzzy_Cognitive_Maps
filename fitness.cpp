@@ -1,8 +1,8 @@
 #include "fitness.h"
 
-double fitness(array<double, 100> dmns)
+long double fitness(array<long double, 100> dmns)
 {
-    ifstream inrec ("test-data/wbc.csv");
+    ifstream inrec ("test-data/wbctrain.csv");
     //ifstream inwts ("weights1.csv");
     //ofstream outrec ("wbcrec.csv");
 
@@ -10,10 +10,10 @@ double fitness(array<double, 100> dmns)
 
     const int size = 10;
 
-    int l, m, n, t;
-    double net, toterror = 0.0;
-    array<double, 10> a, a1, a2;
-    array<array<double, size>, size> w;
+    int l, m, n, t ;
+    long double net, toterror = 0.0;
+    array<long double, 10> a, a1, a2;
+    array<array<long double, size>, size> w;
 
     //int a1[50][10000];
     /*
@@ -30,7 +30,7 @@ double fitness(array<double, 100> dmns)
         }
     }
 
-    for (l = 0; l < 699 ; l++) { // iterate for each record
+    for (l = 0; l < 559 ; l++) { // iterate for each record
         for (m = 0; m < 10; m++)            {// loading the concepts within records
             inrec >> a[m];
             //outrec << a[m] << "\t";
@@ -42,15 +42,15 @@ double fitness(array<double, 100> dmns)
         //a[9]=0; // As it is training data
         //cout << endl;
         t = 0;
-        while (t < 3) {//total two increments
+        while (t < 1) {//total two increments
             // Calculating activation of each function
             for (m = 0; m < 10; m++) {
                 for (n=0; n < 10; n++) {
                     net += a[n] * w[n][m];
                 }
                 //cout << m <<" "<< net <<" " << t << endl;
-                a1[m] = 1.0 / (1.0 + exp(net * -0.5));
-                //cout << m <<" "<< a1[m] <<" " << t << endl;
+                a1[m] = 1.0 / (1.0 + exp(net * -1.0));
+               //cout << m <<" "<< a1[m] <<" " << t << endl;
             }
 
             a = a1;
@@ -82,5 +82,5 @@ double fitness(array<double, 100> dmns)
       }outwts << "\n";
       }*/
     //cout << toterror/700.0 << endl;
-    return toterror / 700.0;
+    return toterror /((long double) l);
 }

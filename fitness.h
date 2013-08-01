@@ -12,4 +12,4 @@ using std::array;
 using std::ifstream;
 using std::ofstream;
 
-double fitness(array<double, 100> dmns);
+long double fitness(array<long double, 100> dmns);

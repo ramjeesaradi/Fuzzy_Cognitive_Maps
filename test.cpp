@@ -22,9 +22,9 @@ int main()
     const int size = 10;
 
     int l, m, n, t, correct;
-    double net, toterror = 0.0;
-    array<double, 10> a, a1, a2;
-    array<array<double, size>, size> w;
+    long double net, toterror = 0.0;
+    array<long double, 10> a, a1, a2;
+    array<array<long double, size>, size> w;
 	correct = 0;
 
     //int a1[50][10000];
@@ -43,7 +43,7 @@ int main()
 		
     }
 
-    for (l = 0; l < 699 ; l++) { // iterate for each record
+    for (l = 0; l < 140 ; l++) { // iterate for each record
         for (m = 0; m < 10; m++)            {// loading the concepts within records
             inrec >> a[m];
             outrec << a[m] << "\t";
@@ -62,7 +62,7 @@ int main()
                     net += a[n] * w[n][m];
                 }
                 //cout << m <<" "<< net <<" " << t << endl;
-                a1[m] = 1.0 / (1.0 + exp(net * -0.5));
+                a1[m] = 1.0 / (1.0 + exp(net * -1.0));
                 //cout << m <<" "<< a1[m] <<" " << t << endl;
             }
 
@@ -84,8 +84,9 @@ int main()
            }
            }*/
 		
-        if((a2[9]-a1[9])<=0.001){
+        if((a2[9]-a1[9])<=0.2){
 			correct ++;
+			cout << a2[9] << " "<< a1[9] <<endl;
 		}
         //cout << l << " "<< toterror <<" "<<  a2[9] <<" "<< a1[9] <<endl;
     }
