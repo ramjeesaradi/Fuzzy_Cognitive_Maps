@@ -10,95 +10,56 @@ using std::endl;
 using std::array;
 using std::ifstream;
 using std::ofstream;
+using std::abs;
 
 int main()
 {
-    ifstream inrec ("test-data/wbc.csv");
-    ifstream inwts ("test-data/weights.csv");
+    ifstream inrec ("test-data/wbctest.csv");//import input file
+	ifstream inwts ("test-data/weights.csv"); //import weights 
     ofstream outrec ("test-data/wbcrec.csv");
 
     // TODO: l,m,n,t say nothing about what the variables are.
 
     const int size = 10;
 
-    int l, m, n, t, correct;
-    long double net, toterror = 0.0;
-    array<long double, 10> a, a1, a2;
+    int m, n, t=0, l=0 , correct = 0 ;
+    long double net=0.0;
+    array<long double, size> a, a1, a2;
     array<array<long double, size>, size> w;
-	correct = 0;
 
-    //int a1[50][10000];
-    /*
-      for(int x=0; x < 100 ; x++){
-      cout << dmns[x]<<"  "<< x << endl;
-      }
-    */
-
-    for(m = 0; m < 10; m++)    { //import the weights
-        for(n = 0; n < 10; n++)        {
-            inwts >> w[m][n];
-            //cout <<m*10 + n <<" " << dmns[m*10 + n] << endl;
-            //cout << w[m][n] << endl ;
+    for(m = 0; m < size; m++)    { //import the weights passed to a local array
+        for(n = 0; n < size; n++)        {
+            inwts >>w[m][n];			
         }
-		
     }
-
-    for (l = 0; l < 140 ; l++) { // iterate for each record
-        for (m = 0; m < 10; m++)            {// loading the concepts within records
+   while(!inrec.eof()) { // check if file ends
+        for (m = 0; m < size; m++) {// loading the concepts within records
             inrec >> a[m];
             outrec << a[m] << "\t";
             a2[m] = a[m]; //saving original values to the actual concepts
-
-            //cout << a[m] <<" ";
+			//if(isnan(a2[m]))cout<<"bannnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn!!"<<endl;
         }
-        
-        //a[9]=0; // As it is training data
+        a[size-1]=0; // As it is training data
         //cout << endl;
-        t = 0;
-        while (t < 3) {//total two increments
+        
+        while (t < 1) {//total two increments
             // Calculating activation of each function
-            for (m = 0; m < 10; m++) {
-                for (n=0; n < 10; n++) {
+            for (m = 0; m < size; m++) {
+                for (n=0; n < size; n++) {
                     net += a[n] * w[n][m];
-                }
-                //cout << m <<" "<< net <<" " << t << endl;
-                a1[m] = 1.0 / (1.0 + exp(net * -1.0));
-                //cout << m <<" "<< a1[m] <<" " << t << endl;
+				
+				}               
+                a1[m] = 1.0 / (1.0 + exp(net * (-1.0)));
+				
             }
-
-            a = a1;
-            /*for (m = 0; m < 10; m++){// updating concepts
-              a[m]=a1[m];
-              }*/
-            //cout << a1[9] << " "<< t<<endl;
+			//cout<<isnan(a2[m])<<endl;
+            a = a1;//updating for next time step t+1th state of a
             t++;
         }
-		outrec << a1[9] << endl;
-        /*Here we put The Weight learning Algorithm
-          The Hebbian learning rule */
-        /* if ((a2[9]=1.0 && a1[9]<0.5)||(a2[9]<=0.0 && a1[9]>=0.5)){
-           for (m=0; m<10; m++){
-           for(n=0; n<10; n++){
-           w[n][m] += 0.9*(a2[m]-a1[m])*a2[n];
-           }
-           }
-           }*/
-		
-        if((a2[9]-a1[9])<=0.2){
-			correct ++;
-			cout << a2[9] << " "<< a1[9] <<endl;
-		}
-        //cout << l << " "<< toterror <<" "<<  a2[9] <<" "<< a1[9] <<endl;
+		outrec << a1[size-1]<< "\n";
+		if(abs(a2[size-1]-a1[size-1])<0.1) correct++;
+		l++;
     }
-
-    /*ofstream outwts ("weights1.csv");
-      for (m=0; m<10; m++){ // print weights
-      for(n=0; n<10; n++){
-      //cout << w[m][n] << endl;
-      outwts << w[m][n]<<"\t";
-      }outwts << "\n";
-      }*/
-    //cout << toterror/700.0 << endl;
-    cout << correct;
-	return 0;
+	cout << correct;
+    return 0;
 }

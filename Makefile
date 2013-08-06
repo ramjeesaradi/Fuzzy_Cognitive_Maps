@@ -1,18 +1,21 @@
 FLAGS = -g -std=c++11
 
-all: fcm.exe test.exe
+all: main.exe test.exe
 
-error.o: error.cpp error.h
+fcm.o: fcm.cpp fcm.h
+	g++ -c fcm.cpp $(FLAGS)
+
+error.o: error.cpp error.h fcm.o
 	g++ -c error.cpp $(FLAGS)
 
-pso.o: pso.cpp pso.h error.o
+pso.o: pso.cpp pso.h error.o fcm.o
 	g++ -c pso.cpp $(FLAGS)
 
-fcm.exe: fcm.cpp error.o pso.o
-	g++ -o fcm.exe error.o pso.o fcm.cpp $(FLAGS)
+main.exe: main.cpp error.o pso.o fcm.o
+	g++ -o main.exe error.o pso.o fcm.o main.cpp $(FLAGS)
 
 test.exe: test.cpp
 	g++ -o test.exe test.cpp $(FLAGS)
 
 clean:
-	rm -f *.o fcm
+	rm -f *.o main

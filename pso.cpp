@@ -43,9 +43,9 @@ array<long double, 100> pso(long double epsilon, long double omega, long double 
                 g = p[i];
             }
         }
-		for(int x=0; x < 100; x++){
+		/*for(int x=0; x < 100; x++){
 		cout << x <<"  "<< g[x] << endl;
-		}
+		}*/
 		cout << iter <<" "<< error(g)<< endl;
 		
     }
