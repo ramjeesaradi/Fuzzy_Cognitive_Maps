@@ -14,8 +14,8 @@ pso.o: pso.cpp pso.h error.o fcm.o
 main.exe: main.cpp error.o pso.o fcm.o
 	g++ -o main.exe error.o pso.o fcm.o main.cpp $(FLAGS)
 
-test.exe: test.cpp
-	g++ -o test.exe test.cpp $(FLAGS)
+test.exe: test.cpp test.h fcm.o
+	g++ -o test.exe fcm.o test.cpp $(FLAGS)
 
 clean:
 	rm -f *.o main

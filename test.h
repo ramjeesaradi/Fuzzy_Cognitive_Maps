@@ -1,15 +1,5 @@
 #pragma once
 
-#include <fstream>
-#include <iostream>
-#include <cmath>
-#include <cstdlib>
-#include <array>
+#include "fcm.h"
 
-using std::cout;
-using std::endl;
-using std::array;
-using std::ifstream;
-using std::ofstream;
-
-long double test(array<long double, 100> dmns);
+void test();

@@ -12,5 +12,6 @@ using std::array;
 using std::ifstream;
 using std::ofstream;
 using std::isnan;
+using std::abs;
 
-long double fcm(array<long double, 100> concept, array<long double, 100> dmns, int size, int horizone);
+long double fcm(array<long double, 100> concept, array<long double, 100> dmns, int array_size, int horizone);
