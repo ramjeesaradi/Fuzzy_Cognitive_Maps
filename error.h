@@ -2,4 +2,4 @@
 
 #include "fcm.h"
 
-long double error(array<long double, 100> dmns);
+double error(array<double, 100> dimensions , int horizon ,int concept_nos);

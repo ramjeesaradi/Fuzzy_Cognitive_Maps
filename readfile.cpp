@@ -21,7 +21,7 @@ int main()
     const int size = 10;
 
     int m, n;
-    array<long double, size> a;
+    array<double, size> a;
 
     while(!inrec.eof()){ // iterate for each record
         

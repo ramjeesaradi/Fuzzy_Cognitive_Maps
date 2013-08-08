@@ -2,4 +2,4 @@
 
 #include "fcm.h"
 
-void test();
+void test(int horizon);

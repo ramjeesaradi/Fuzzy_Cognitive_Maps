@@ -3,4 +3,4 @@
 #include "error.h"
 #include "fcm.h"
 
-array<long double, 100> pso(long double lower_bound ,long double upper_bound ,long double epsilon, long double omega, long double phyp, long double phyg);
+array<double, 100> pso(double lower_bound ,double upper_bound ,double epsilon, double omega, double phyp, double phyg , int horizon ,int concept_nos);

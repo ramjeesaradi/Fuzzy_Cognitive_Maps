@@ -1,10 +1,10 @@
 #include "fcm.h"
 
-long double fcm(array<long double, 100> concept, array<long double, 100> dmns, int concept_nos, int horizone) {
+double fcm(array<double, 100> concept, array<double, 100> dmns, int concept_nos, int horizon) {
 	const int size = 100;
 	int time_step = 0;
-	array<long double, size> new_concept = {0.0} , net ={0.0};
-	array<array<long double, size>, size> w;
+	array<double, size> new_concept = {0.0} , net ={0.0};
+	array<array<double, size>, size> w;
 	int m, n;
 	
 	for(m = 0; m < concept_nos; m++)    { //import the weights passed to a local array
@@ -14,7 +14,7 @@ long double fcm(array<long double, 100> concept, array<long double, 100> dmns, i
         }
     }
 	
-	while (time_step < horizone) {    //total two increments
+	while (time_step < horizon) {    //total two increments
             // Calculating activation of each function
             for (m = 0; m < concept_nos; m++) {
                 for (n=0; n < concept_nos; n++) {
