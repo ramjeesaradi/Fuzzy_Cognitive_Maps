@@ -2,20 +2,20 @@ FLAGS = -g -std=c++11
 
 all: main.exe test.exe
 
-fcm.o: fcm.cpp fcm.h
-	g++ -c fcm.cpp $(FLAGS)
+fcm.o: src/fcm.cpp src/fcm.h
+	g++ -c obj/fcm.o src/fcm.cpp $(FLAGS)
 
-error.o: error.cpp error.h fcm.o
-	g++ -c error.cpp $(FLAGS)
+error.o: src/error.cpp src/error.h obj/fcm.o
+	g++ -c obj/error.o src/error.cpp $(FLAGS)
 
-pso.o: pso.cpp pso.h error.o fcm.o
-	g++ -c pso.cpp $(FLAGS)
+pso.o: src/pso.cpp src/pso.h obj/error.o obj/fcm.o
+	g++ -c obj/pso.o src/pso.cpp $(FLAGS)
 
-main.exe: main.cpp error.o pso.o fcm.o
-	g++ -o main.exe error.o pso.o fcm.o main.cpp $(FLAGS)
+main.exe: src/main.cpp obj/error.o obj/pso.o obj/fcm.o
+	g++ -o bin/main.exe obj/error.o obj/pso.o obj/fcm.o src/main.cpp $(FLAGS)
 
-test.exe: test.cpp test.h fcm.o
-	g++ -o test.exe fcm.o test.cpp $(FLAGS)
+test.exe: src/test.cpp src/test.h obj/fcm.o
+	g++ -o bin/test.exe obj/fcm.o src/test.cpp $(FLAGS)
 
 clean:
-	rm -f *.o main
+	rm -f obj/*.o main
