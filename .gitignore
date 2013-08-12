@@ -2,3 +2,8 @@ fcm
 *~
 *.o
 /Debug
+/fcm.exe
+/main.exe
+/main.exe.stackdump
+/readfile.exe
+/test.exe
