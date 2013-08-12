@@ -2,9 +2,9 @@
 
 void test(int horizon)
 {
-    ifstream inrec ("test-data/wbctest.csv");//import input file
+    ifstream inrec ("test-data/wbc/test.csv");//import input file
 	ifstream inwts ("test-data/weights.csv"); //import weights 
-    ofstream outrec ("test-data/wbcrec.csv");
+    ofstream outrec ("test-data/wbc/predicted.csv");
 
     // TODO: l,m,n,t say nothing about what the variables are.
 	int concept_nos = 10;

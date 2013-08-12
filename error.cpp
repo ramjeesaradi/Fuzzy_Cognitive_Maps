@@ -2,7 +2,7 @@
 
 double error(array<double, 100> dimensions , int horizon ,int concept_nos)
 {
-    ifstream inrec ("test-data/wbctrain.csv");//import input file
+    ifstream inrec ("test-data/wbc/train.csv");//import input file
 
 
     // TODO: l,m,n,t say nothing about what the variables are.

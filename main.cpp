@@ -18,7 +18,7 @@ int main() {
 	cin >> epsilon;
 	cout << endl;
 	
-	cout << "Enter Omega:";
+	cout << "Enter iteration:";
 	cin >> omega;
 	cout << endl;
 	
