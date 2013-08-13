@@ -2,12 +2,12 @@
 
 void test(int horizon)
 {
-    ifstream inrec ("test-data/wbc/test.csv");//import input file
+    ifstream inrec ("test-data/iris/test.csv");//import input file
 	ifstream inwts ("test-data/weights.csv"); //import weights 
-    ofstream outrec ("test-data/wbc/predicted.csv");
+    ofstream outrec ("test-data/iris/predicted.csv");
 
     // TODO: l,m,n,t say nothing about what the variables are.
-	int concept_nos = 10;
+	int concept_nos = 5;
     const int size = 100;
 	
 
@@ -29,8 +29,11 @@ void test(int horizon)
         a[concept_nos-1]=0; // As it is training data
         double output = fcm( a, w,concept_nos , horizon);
        
-		outrec << output << "\n";
-		if(abs(a2[concept_nos-1]-output) < 0.25) correct++;
+		outrec << output << "\t";
+		if(abs(a2[concept_nos-1]-output) < 0.25){
+			correct++;
+			outrec << "True" << "\n";
+		}else outrec << "False" << "\n";
 		l++;
     }
 	cout << correct << " of " << l << endl;;
