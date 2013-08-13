@@ -15,4 +15,4 @@ using std::ofstream;
 using std::isnan;
 using std::abs;
 
-double fcm(array<double, 100> concept, array<double, 100> dmns, int array_size, int horizon);
+double fcm(array<double, 100> concept, array<double, 500> dmns, int array_size, int horizon);

@@ -1,8 +1,8 @@
 #include "error.h"
 
-double error(array<double, 100> dimensions , int horizon ,int concept_nos)
+double error(array<double, 500> dimensions , int horizon ,int concept_nos)
 {
-    ifstream inrec ("test-data/iris/train.csv");//import input file
+    ifstream inrec ("/cygdrive/c/Users/krrao/Eclipse/Workspace/fcm/test-data/wine/train.csv");//import input file
 
 
     // TODO: l,m,n,t say nothing about what the variables are.

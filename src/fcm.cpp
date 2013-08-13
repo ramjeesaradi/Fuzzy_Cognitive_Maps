@@ -1,6 +1,6 @@
 #include "fcm.h"
 
-double fcm(array<double, 100> concept, array<double, 100> dmns, int concept_nos, int horizon) {
+double fcm(array<double, 100> concept, array<double, 500> dmns, int concept_nos, int horizon) {
 	const int size = 100;
 	int time_step = 0;
 	array<double, size> new_concept = {0.0} , net ={0.0};
@@ -19,15 +19,7 @@ double fcm(array<double, 100> concept, array<double, 100> dmns, int concept_nos,
             for (m = 0; m < concept_nos; m++) {
                 for (n=0; n < concept_nos; n++) {
                     net[m] += concept[n] * w[n][m];
-					
-					static int y=0;
-					if(isnan(w[n][m])&&y==0)
-						{
-						cout<<"bannnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn!!"<<endl;
-						y++;
-						}
-
-                } 
+					} 
 				new_concept[m] = net[m];
 				//cout << net << endl;
                 //new_concept[m] = 1.0 / (1.0 + exp((new_concept[m] - 1.0) * 6.0 * -1.0 ));

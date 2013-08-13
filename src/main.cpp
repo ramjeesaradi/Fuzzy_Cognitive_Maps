@@ -3,7 +3,7 @@
 #include "fcm.h"
 
 int main() {
-    ofstream otwts("test-data/weights.csv");
+    ofstream otwts("/cygdrive/c/Users/krrao/Eclipse/Workspace/fcm/test-data/weights.csv");
 	double upper_bound ,lower_bound ,epsilon , omega, phyp, phyg ,horizon ,concept_nos;
 	
 	cout << "Enter Upper bound:";
@@ -38,10 +38,10 @@ int main() {
 	cin >> concept_nos;
 	cout << endl;
 	
-    array<double, 100> temp = pso( lower_bound ,upper_bound ,epsilon , omega, phyp, phyg, horizon ,concept_nos );
-    for(int m = 0; m < 10; m++) { //import the weights
-        for(int n = 0; n < 10; n++) {
-            otwts << temp[m*10 + n] << "\t";
+    array<double, 500> temp = pso( lower_bound ,upper_bound ,epsilon , omega, phyp, phyg, horizon ,concept_nos );
+    for(int m = 0; m < concept_nos; m++) { //import the weights
+        for(int n = 0; n < concept_nos; n++) {
+            otwts << temp[m*concept_nos + n] << "\t";
         } otwts << endl;
     }
     return 0;
