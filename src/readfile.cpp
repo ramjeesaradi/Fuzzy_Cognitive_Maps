@@ -13,8 +13,8 @@ using std::getline;
 
 int main()
 {
-    ifstream inrec ("test-data/wbc/train.csv");
-    ofstream outrec ("test-data/wbc/rec.csv");
+    ifstream inrec ("test-data/train.csv");
+    ofstream outrec ("test-data/rec.csv");
 
     // TODO: l,m,n,t say nothing about what the variables are.
 

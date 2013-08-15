@@ -3,8 +3,8 @@
 #include "fcm.h"
 
 int main() {
-    ofstream otwts("/cygdrive/c/Users/krrao/Eclipse/Workspace/fcm/test-data/weights.csv");
-	double upper_bound ,lower_bound ,epsilon , omega, phyp, phyg ,horizon ,concept_nos;
+    ofstream otwts("/cygdrive/c/Eclipse/Workspace/fcm1/test-data/weights.csv");
+	double upper_bound ,lower_bound ,epsilon , omega, phyp, phyg ,horizon ,num_concepts, num_output_class;
 	
 	cout << "Enter Upper bound:";
 	cin >> upper_bound;
@@ -35,13 +35,17 @@ int main() {
 	cout << endl;
 	
 	cout << "Enter number of Concepts/variables:";
-	cin >> concept_nos;
+	cin >> num_concepts;
 	cout << endl;
 	
-    array<double, 500> temp = pso( lower_bound ,upper_bound ,epsilon , omega, phyp, phyg, horizon ,concept_nos );
-    for(int m = 0; m < concept_nos; m++) { //import the weights
-        for(int n = 0; n < concept_nos; n++) {
-            otwts << temp[m*concept_nos + n] << "\t";
+	cout << "Enter Number of target classes:";
+	cin >> num_output_class;
+	cout << endl;
+	
+    array<double, 500> temp = pso( lower_bound ,upper_bound ,epsilon , omega, phyp, phyg, horizon ,num_concepts, num_output_class );
+    for(int m = 0; m < num_concepts; m++) { //import the weights
+        for(int n = 0; n < num_concepts; n++) {
+            otwts << temp[m*num_concepts + n] << "\t";
         } otwts << endl;
     }
     return 0;

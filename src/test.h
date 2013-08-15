@@ -2,4 +2,4 @@
 
 #include "fcm.h"
 
-void test(int horizon, int concept_nos);
+void test(int horizon, int num_concepts , int num_output_class);

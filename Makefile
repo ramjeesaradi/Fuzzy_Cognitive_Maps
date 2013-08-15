@@ -1,21 +1,21 @@
 FLAGS = -g -std=c++11
 
-all: main.exe test.exe
+all: train test
 
 fcm.o: src/fcm.cpp src/fcm.h
 	g++ -c -o obj/fcm.o src/fcm.cpp  $(FLAGS)
 
-error.o: src/error.cpp src/error.h obj/fcm.o
+error.o: src/error.cpp src/error.h fcm.o
 	g++ -c -o obj/error.o src/error.cpp  $(FLAGS)
 
-pso.o: src/pso.cpp src/pso.h obj/error.o obj/fcm.o
+pso.o: src/pso.cpp src/pso.h error.o fcm.o
 	g++ -c -o obj/pso.o src/pso.cpp  $(FLAGS)
 
-main.exe: src/main.cpp obj/error.o obj/pso.o obj/fcm.o
-	g++ -o bin/main.exe obj/error.o obj/pso.o obj/fcm.o src/main.cpp $(FLAGS)
+train: src/main.cpp error.o pso.o fcm.o
+	g++ -o bin/train obj/error.o obj/pso.o obj/fcm.o src/main.cpp $(FLAGS)
 
-test.exe: src/test.cpp src/test.h obj/fcm.o
-	g++ -o bin/test.exe obj/fcm.o src/test.cpp $(FLAGS)
+test: src/test.cpp src/test.h fcm.o
+	g++ -o bin/test obj/fcm.o src/test.cpp $(FLAGS)
 
 clean:
-	rm *.o 
+	rm obj/*.o bin/*.exe
